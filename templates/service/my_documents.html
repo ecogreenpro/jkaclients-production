@@ -1,0 +1,212 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_filters %}
+<!DOCTYPE html>
+
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>My Documents | JK Associates</title>
+    <meta name="description" content=""/>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.png' %}"/>
+</head>
+
+<body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+        <!-- Menu -->
+
+        {% include 'authentication/sidebar.html' %}
+
+        <!-- Layout container -->
+        <div class="layout-page">
+            {% include 'authentication/header.html' %}
+
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+                <!-- Content -->
+
+                <div class="container">
+                    <h4 class="card-header">My Documents</h4>
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message | safe }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+
+                    {% endfor %}
+                    {% for my_contract in my_contracts %}
+                        <br>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ forloop.counter }}. {{ my_contract.contract_title }}</h5>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive text-nowrap">
+                                    <h2 id="tableTitle"></h2>
+                                    <table id="{{ my_contract.contract_id }}-x"
+                                           class="table table-bordered table-striped">
+                                        {% if my_contract.my_doc.all %}
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>File</th>
+                                                <th>Description</th>
+                                                <th>Downloads</th>
+                                                <th>Upload Date</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="table-border-bottom-0">
+
+                                            {% for files in my_contract.my_doc.all %}
+                                                <tr>
+                                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                                        <strong>{{ forloop.counter }}</strong>
+                                                    </td>
+                                                    <td>{{ files.file_name }}</td>
+
+                                                    <td><strong>{{ files.description }}</strong></td>
+                                                    <td>
+                                                        <a href="{{ files.file_url }}"
+                                                           download="{files.file.url}}">Download File <i
+                                                                class="bx bx-download"> </i></a>
+                                                    </td>
+                                                    <td>{{ files.upload_date }}</td>
+
+                                                </tr>
+
+                                            {% endfor %}
+                                        {% else %}
+                                            <div class="card bg-warning text-white text-center p-3">
+                                                <figure class="mb-0">
+                                                    <blockquote class="blockquote">
+                                                        <p><i class="bx bx-upload"></i><br>
+                                                            Please upload related document.</p>
+                                                    </blockquote>
+                                                </figure>
+                                            </div>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn rounded-pill btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#{{ my_contract.contract_id }}">
+                                    <i class="bx bx-plus-circle"></i> Add Files
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Footer -->
+                {% include 'authentication/footer.html' %}
+                <!-- / Footer -->
+
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+    </div>
+
+    {% for my_contract in my_contracts %}
+        <div class="modal fade" id="{{ my_contract.contract_id }}" data-bs-backdrop="static" tabindex="-1"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="exampleModalLabel1">Upload for {{ my_contract.contract_title }}</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <form class="needs-validation" method="post" enctype="multipart/form-data"
+                          action="{% url 'service:upload_file' my_contract.contract_id %}" novalidate>
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <div class="col mb-3">
+                                <label for="nameBasic" class="form-label">File Name</label>
+                                <input type="text" id="nameBasic" name="file_name" class="form-control"
+                                       placeholder="File Name" required>
+                            </div>
+                            <div class="mb-3">
+                                {{ form | crispy }}
+                            </div>
+                            <div class="col mb-3">
+                                <label for="nameBasic" class="form-label">Note</label>
+                                <textarea class="form-control" name="note" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close
+                            </button>
+                            <button type="submit" class="btn btn-primary"><i class="bx bx-cloud-upload"></i> Upload
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+</div>
+</body>
+
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
+{% for my_contract in my_contracts %}
+    <script>
+        $(function () {
+            $("#{{my_contract.contract_id}}-x").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+        });
+    </script>
+
+{% endfor %}
+
+</html>

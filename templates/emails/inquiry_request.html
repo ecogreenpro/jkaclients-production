@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap" rel="stylesheet">
+</head>
+
+<body style="font-family: Nunito, sans-serif; font-size: 15px; font-weight: 400;">
+<div style="margin-top: 50px; background-color:#f2f2f2;">
+    <br>
+    <table cellpadding="0" cellspacing="0"
+           style="font-family: Nunito, sans-serif; font-size: 15px; font-weight: 400; max-width: 600px; border: none; margin: 0 auto; border-radius: 6px; overflow: hidden; background-color: #fff; box-shadow: 0 0 3px rgba(60, 72, 88, 0.15);">
+        <thead>
+        <tr style="padding: 3px 0; line-height: 68px; text-align: center; color: #fff; font-size: 24px; font-weight: 700; letter-spacing: 1px;">
+            <th scope="col"><img align="center" border="0"
+                                 src="https://babys.com.bd/storage/2020/07/cropped-Babys_3D_BrightReg-01-1.png"
+                                 alt="Image" title="Image"
+                                 style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;float: none;"
+                                 width="200px" height="80px"/></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td style="padding: 24px 24px;">
+                <div style="padding: 8px; color: #3fb5e4; background-color: rgba(63,228,195,0.2); border: 1px solid rgba(63,181,228,0.2); border-radius: 6px; text-align: center; font-size: 16px; font-weight: 600;">
+                    There has new Inquiry Request from <span style="color: red">{{ first_name }} {{ last_name }}</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 0 24px 15px; color: #8492a6;">
+                 <strong>Contact Details:</strong> <br>
+                {{ phone }}<br>
+                {{ email }}<br>
+                {{ inquiry_option }}
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding: 15px 24px 0; color: #8492a6;">
+                <strong>Inquiry note:</strong> <br>
+                {{ inquiry_details | safe }}
+            </td>
+        </tr>
+
+
+        <tr>
+            <td style="padding: 15px 24px 15px; color: #8492a6;">
+                Baby's <br> Response Team
+            </td>
+        </tr>
+
+       <tr>
+            <td style="padding: 16px 8px; color: #ffffff; background-color: #3AAFF0; text-align: center;">
+                ©Baby's.
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+</div>
+<!-- Hero End -->
+</body>
+</html>

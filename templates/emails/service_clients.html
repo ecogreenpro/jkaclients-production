@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load header_template_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Confirmation Email</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap" rel="stylesheet">
+    <!-- Main Css -->
+    <!-- <link href="css/style.css" rel="stylesheet" type="text/css" /> -->
+</head>
+
+<body>
+<!-- Hero Start -->
+<div style="margin-top: 50px; background-color:#f2f2f2;">
+    <br>
+    <table cellpadding="0" cellspacing="0"
+           style="font-family: Nunito, sans-serif; font-size: 15px; font-weight: 400; max-width: 600px; border: none; margin: 0 auto; border-radius: 6px; overflow: hidden; background-color: #fff; box-shadow: 0 0 3px rgba(60, 72, 88, 0.15);">
+        <thead>
+        <tr style="padding: 3px 0; line-height: 68px; text-align: center; color: #fff; font-size: 24px; font-weight: 700; letter-spacing: 1px;">
+            <th scope="col"><img align="center" border="0"
+                                 src="https://i.ibb.co/Q8bqjFL/favicon-VAT.jpg"
+                                 alt="Image" title="Image"
+                                 style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;float: none;"
+                                 width="100px" height="100px"/></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td style="padding: 48px 24px 0; color: #161c2d; font-size: 18px; font-weight: 600;">
+                Hello, {{ user.get_full_name }}
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 15px 24px 15px; color: #8492a6;">
+                You drop a service request. Check your dashboard.
+            </td>
+        </tr>
+        <tr>
+            <td align="center" style="font-size:0px;padding:30px 40px 0 40px;word-break:break-word">
+                <div style="font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;line-height:24px;text-align:center;color:#8492a6">
+                    <div><strong>Name: </strong>{{ user.get_full_name }}</div>
+                    <div><strong>Required Service: </strong>{{ service }}</div>
+                    <div><strong>Note: </strong>{{ notes }}</div>
+                    <br>
+                    <br>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 15px 24px 15px; color: #8492a6;">
+                JK Associates <br> Support Team.
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding: 16px 8px; color: #ffffff; background-color: #3AAFF0; text-align: center;">
+                © 2023 JK Associates
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+</div>
+<!-- Hero End -->
+</body>
+</html>

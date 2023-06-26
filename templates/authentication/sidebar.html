@@ -1,0 +1,151 @@
+{% load static %}
+<head>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon/favicon.ico' %}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'vendor/fonts/boxicons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendor/css/core.css' %}" class="template-customizer-core-css"/>
+    <link rel=" stylesheet" href="{% static 'vendor/css/theme-default.css' %}" class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}"/>
+    <link rel=" stylesheet" href="{% static 'vendor/libs/perfect-scrollbar/perfect-scrollbar.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendor/libs/apex-charts/apex-charts.css' %}"/>
+    <link rel="stylesheet" href="{% static 'vendor/libs/datatables-bs4/css/dataTables.bootstrap4.css' %}">
+    <script src="{% static 'vendor/js/helpers.js' %}"></script>
+    <script src="{% static 'js/config.js' %}"></script>
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "160620561023773");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v17.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+</head>
+
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="#" class="app-brand-link">
+            <h3 class="app-text demo menu-text fw-bolder text-center">JK Associates</h3>
+        </a>
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+    {% with url_name=request.resolver_match.url_name %}
+        <ul class="menu-inner py-1">
+            <!-- Dashboard -->
+            <li class="menu-item {% if url_name == 'dashboard' %} active {% endif %}">
+                <a href="{% url 'authentication:dashboard' %}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Dashboard</div>
+                </a>
+            </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Service</span>
+            </li>
+            <li class="menu-item {% if url_name == 'my-service' %} active {% endif %}">
+                <a href="{% url 'service:my-service' %}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-grid"></i>
+                    <div data-i18n="Analytics">My Service</div>
+                </a>
+            </li>
+            <li class="menu-item {% if url_name == 'contract' %} active {% endif %}">
+                <a href="{% url 'service:contract' %}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-book-open"></i>
+                    <div data-i18n="Analytics">Transaction of Summery</div>
+                </a>
+            </li>
+            <li class="menu-item {% if url_name == 'my_document' %} active {% endif %}">
+                <a href="{% url 'service:my_document' %}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file-blank"></i>
+                    <div data-i18n="Analytics">My Documents</div>
+                </a>
+            </li>
+
+            <!-- Components -->
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Accounts</span>
+            </li>
+            <!-- Cards -->
+            <li class="menu-item {% if url_name == 'invoice' %} active {% endif %}">
+                <a href="{% url 'account:invoice' %}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-credit-card"></i>
+                    <div data-i18n="Analytics">Invoice</div>
+                </a>
+            </li>
+            <li class="menu-item {% if url_name == 'payment' %} active {% endif %}">
+                <a href="{% url 'account:payment' %}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-dollar"></i>
+                    <div data-i18n="Analytics">Payments</div>
+                </a>
+            </li>
+
+            <!-- Forms & Tables -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Appointments</span>
+            </li>
+            <li class="menu-item {% if url_name == 'my_appointment' %} active {% endif %}">
+                <a href="{% url 'appointment:my_appointment' %}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-calendar"></i>
+                    <div data-i18n="Analytics">My Appointments</div>
+                </a>
+            </li>
+            <li class="menu-item {% if url_name == 'book_a_appointment' %} active {% endif %}">
+                <a href="{% url 'appointment:book_a_appointment' %}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-video"></i>
+                    <div data-i18n="Analytics">Book a Appointments</div>
+                </a>
+            </li>
+            <!-- Misc -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
+            <li class="menu-item {% if url_name == 'my_team' %} active {% endif %}">
+                <a href="{% url 'authentication:my_team' %}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-cog"></i>
+                    <div data-i18n="Analytics">My Team</div>
+                </a>
+            </li>
+            <li class="menu-item {% if url_name == 'account_settings' %} active {% endif %}">
+                <a href="{% url 'authentication:account_settings' %}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-cog"></i>
+                    <div data-i18n="Analytics">Account Settings</div>
+                </a>
+            </li>
+
+
+        </ul>
+    {% endwith %}
+</aside>
